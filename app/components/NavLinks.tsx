@@ -10,9 +10,9 @@ import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 
 const links = [
-  { name: 'Home', href: '/dashboard', icon: HomeIcon },
-  { name: 'Invoices', href: '/dashboard/invoices', icon: DocumentDuplicateIcon },
-  { name: 'Customers', href: '/dashboard/customers', icon: UserGroupIcon },
+  { name: 'Home', href: '/', icon: HomeIcon },
+  { name: 'Invoices', href: '/invoices', icon: DocumentDuplicateIcon },
+  { name: 'Customers', href: '/customers', icon: UserGroupIcon },
 ];
 
 export default function NavLinks() {
