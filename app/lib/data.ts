@@ -1,9 +1,10 @@
 import { prisma } from '@/app/lib/prisma';
 import { formatCurrency } from '@/app/lib/utils';
+import { unstable_noStore as noStore } from 'next/cache';
 
 export async function fetchRevenue() {
+  noStore();
   try {
-    // This is a placeholder; you might need to adjust based on your actual model
     const revenue = await prisma.revenue.findMany();
     return revenue;
   } catch (error) {
@@ -13,6 +14,7 @@ export async function fetchRevenue() {
 }
 
 export async function fetchLatestInvoices() {
+  noStore();
   try {
     const latestInvoices = await prisma.invoice.findMany({
       orderBy: { date: 'desc' },
@@ -28,11 +30,14 @@ export async function fetchLatestInvoices() {
       },
     });
 
-    // The raw amount is in cents, so we format it for display
-    const formattedInvoices = latestInvoices.map((invoice: any) => ({
-      ...invoice,
+    const formattedInvoices = latestInvoices.map((invoice) => ({
+      id: invoice.id,
       amount: formatCurrency(invoice.amount),
+      name: invoice.customer.name,
+      image_url: invoice.customer.image_url,
+      email: invoice.customer.email,
     }));
+
     return formattedInvoices;
   } catch (error) {
     console.error('Database Error:', error);
@@ -41,6 +46,7 @@ export async function fetchLatestInvoices() {
 }
 
 export async function fetchCardData() {
+  noStore();
   try {
     const invoiceCountPromise = prisma.invoice.count();
     const customerCountPromise = prisma.customer.count();
