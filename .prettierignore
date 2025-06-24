@@ -1,0 +1,27 @@
+# Dependencies
+/node_modules
+/.pnp
+.pnp.*
+
+# Testing
+/coverage
+
+# Next.js
+/.next/
+/out/
+
+# Production
+/build
+
+# Vercel
+.vercel
+
+# Env files
+.env*
+
+# TypeScript cache
+*.tsbuildinfo
+next-env.d.ts
+
+# Generated assets (optional but good practice)
+/public/
